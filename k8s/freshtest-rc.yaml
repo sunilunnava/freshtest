@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: freshtest
+  namespace: com-att-ocnp-mgmt
+spec:
+  replicas: 1
+  selector:
+    app: freshtest
+  template:
+    metadata:
+      labels:
+        app: freshtest
+    spec:
+      serviceAccount: YOUR
+      containers:
+      - name: freshtest
+        image: ${docker-registry}/${docker-namespace}/freshtest:latest
+        imagePullPolicy: Always
+        ports:
+         - containerPort: 8080
